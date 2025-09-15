@@ -1,19 +1,14 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { resolve } from 'path';
+import config from './examples/webui-config.json';
 
 export default defineConfig({
   plugins: [pluginReact()],
   source: {
     define: {
       'process.env.AGENT_BASE_URL': JSON.stringify(process.env.AGENT_BASE_URL || ''),
-      'process.env.AGENT_WEBUI_CONFIG': JSON.stringify(
-        process.env.AGENT_WEBUI_CONFIG,
-        // ||
-        // {
-        //   basePath: '/[a-zA-Z0-9]+',
-        // },
-      ),
+      'process.env.AGENT_WEBUI_CONFIG': JSON.stringify(process.env.AGENT_WEBUI_CONFIG || config)
     },
     entry: {
       index: './src/entry.tsx',
